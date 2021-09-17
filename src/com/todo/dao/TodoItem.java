@@ -6,12 +6,16 @@ public class TodoItem {
     private String title;
     private String desc;
     private Date current_date;
-
+    
+    @Override
+    public String toString() {
+    	return title + " : " + desc + " - " + current_date;
+    }
 
     public TodoItem(String title, String desc){
-        this.title=title;
-        this.desc=desc;
-        this.current_date=new Date();
+        this.title = title;
+        this.desc = desc;
+        this.current_date = new Date();
     }
     
     public String getTitle() {

@@ -33,7 +33,6 @@ public class TodoUtil {
 		System.out.print(" 내용을 입력하세요 > ");
 		desc = sc.nextLine().trim();
 		
-		//sc.nextLine();
 		System.out.print(" 마감날짜를 입력하세요 > ");
 		due_date = sc.nextLine().trim();
 		
@@ -46,21 +45,29 @@ public class TodoUtil {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.print(" 삭제할 제목을 입력하세요 > ");
+		System.out.print(" 삭제할 항목의 번호를 입력하세요 > ");
+		int num = sc.nextInt();
 		
-		String title = sc.next();
+		if (num < 1 || l.getList().size() < num) {
+			System.out.println(" -> 해당 번호가 존재하지 않습니다.");
+			return;
+		}
 		
-		boolean flag = false;
+		int index = 0;
 		for (TodoItem item : l.getList()) {
-			if (title.equals(item.getTitle())) {
-				l.deleteItem(item);
-				System.out.println(" -> 삭제되었습니다.");
-				flag = true;
+			index++;
+			if (index == num) {
+				System.out.println(" " + index + ". "+ item.toString());
+				System.out.print(" 위 항목을 삭제하시겠습니까? (y/n) > ");
+				String flag = sc.next().trim();
+				
+				if(flag.equals("y")) {
+					l.deleteItem(item);
+					System.out.println(" -> 삭제되었습니다.");
+				}
+				
 				break;
 			}
-		}
-		if(flag == false) {
-				System.out.println(" -> 해당 제목이 존재하지 않습니다.");
 		}
 	}
 
@@ -68,13 +75,15 @@ public class TodoUtil {
 		
 		Scanner sc = new Scanner(System.in);
 
-		System.out.print(" 수정할 제목을 입력하세요 > ");
-		String title = sc.next().trim();
+		System.out.print(" 수정할 항목의 번호를 입력하세요 > ");
+		int num = sc.nextInt();
 		
-		if (!l.isDuplicate(title)) {
-			System.out.println(" -> 해당 제목이 존재하지 않습니다.");
+		if (num < 1 || l.getList().size() < num) {
+			System.out.println(" -> 해당 번호가 존재하지 않습니다.");
 			return;
 		}
+		
+		System.out.println(" " + num + ". "+ l.getList().get(num-1).toString());
 
 		System.out.print(" 새로운 제목을 입력하세요 > ");
 		String new_title = sc.next().trim();
@@ -91,26 +100,29 @@ public class TodoUtil {
 		System.out.print(" 새로운 내용을 입력하세요 > ");
 		String new_description = sc.nextLine().trim();
 		
-		sc.nextLine();
 		System.out.print(" 새로운 마감날짜를 입력하세요 > ");
 		String new_due_date = sc.nextLine().trim();
 		
+		int index = 0;
 		for (TodoItem item : l.getList()) {
-			if (item.getTitle().equals(title)) {
+			index++;
+			if (index == num) {
 				l.deleteItem(item);
 				TodoItem t = new TodoItem(new_title, new_description, new_category, new_due_date);
 				l.addItem(t);
 				System.out.println(" -> 수정되었습니다.");
+				break;
 			}
 		}
 	}
 
 	public static void listAll(TodoList l) {
-		//System.out.println("[전체 목록]");
-		int index = 1;
+		//System.out.println("[전체 목록 (총 " + l.getList().size() + "개)]");
+		// -> TodoMain.java에서
+		int index = 0;
 		for (TodoItem item : l.getList()) {
-			System.out.println(" " + index + ". "+ item.toString());
 			index++;
+			System.out.println(" " + index + ". "+ item.toString());
 		}
 	}
 	

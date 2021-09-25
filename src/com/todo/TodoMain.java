@@ -38,7 +38,7 @@ public class TodoMain {
 				break;
 				
 			case "ls":
-				System.out.println("\n[전체 목록]");
+				System.out.println("[전체 목록 (총 " + l.getList().size() + "개)]");
 				isList = true; //TodoUtil.listAll(l);
 				break;
 

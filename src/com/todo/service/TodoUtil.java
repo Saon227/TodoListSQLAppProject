@@ -91,8 +91,10 @@ public class TodoUtil {
 
 	public static void listAll(TodoList l) {
 		//System.out.println("[전체 목록]");
+		int index = 1;
 		for (TodoItem item : l.getList()) {
-			System.out.println(" " + item.toString());
+			System.out.println(" " + index + ". "+ item.toString());
+			index++;
 		}
 	}
 	

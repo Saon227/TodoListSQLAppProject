@@ -2,6 +2,7 @@ package com.todo;
 
 import java.util.Scanner;
 
+import com.todo.dao.TodoItem;
 import com.todo.dao.TodoList;
 import com.todo.menu.Menu;
 import com.todo.service.TodoUtil;
@@ -60,7 +61,13 @@ public class TodoMain {
 				System.out.println("\n[날짜순 정렬]");
 				isList = true;
 				break;
-			
+				
+			case "find":
+				String keyword = sc.next().trim();
+				System.out.println("[항목 검색 결과]");
+				TodoUtil.findItem(l, keyword);
+				break;
+				
 			case "help":
 				Menu.displaymenu();
 				break;

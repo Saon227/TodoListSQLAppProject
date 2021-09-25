@@ -115,7 +115,20 @@ public class TodoUtil {
 			}
 		}
 	}
-
+	
+	public static void findItem(TodoList l, String keyword) {
+		int index = 0;
+		int count = 0;
+		for (TodoItem item : l.getList()) {
+			index++;
+			if (item.toString().contains(keyword)) {
+				System.out.println(" " + index + ". "+ item.toString());
+				count++;
+			}
+		}
+		System.out.println(" -> 총 " + count + "개의 항목을 찾았습니다.");
+	}
+	
 	public static void listAll(TodoList l) {
 		//System.out.println("[전체 목록 (총 " + l.getList().size() + "개)]");
 		// -> TodoMain.java에서

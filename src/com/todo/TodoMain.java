@@ -62,6 +62,13 @@ public class TodoMain {
 				isList = true;
 				break;
 				
+			case "ls_date_desc":
+				l.sortByDate();
+				l.reverseList();
+				System.out.println("\n[날짜역순 정렬]");
+				isList = true;
+				break;
+				
 			case "find":
 				String keyword = sc.next().trim();
 				System.out.println("[항목 검색 결과]");

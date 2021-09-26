@@ -65,7 +65,6 @@ public class TodoUtil {
 					l.deleteItem(item);
 					System.out.println(" -> 삭제되었습니다.");
 				}
-				
 				break;
 			}
 		}
@@ -115,6 +114,29 @@ public class TodoUtil {
 			}
 		}
 	}
+	
+	public static void listCategory(TodoList l) {
+		// List 준비
+		List<String> list = new ArrayList();
+		for (TodoItem item : l.getList()) {
+			list.add(item.getCategory());
+		}
+		// List를 Set으로 변경
+		Set<String> set = new HashSet<String>(list);
+		// Set을 List로 변경
+		List<String> newList =new ArrayList<String>(set);
+
+		for (String cate : newList) {
+			System.out.print(" " + cate);
+			if(newList.indexOf(cate) != (newList.size()-1)) {
+				System.out.print(" /");
+			} else {
+				System.out.println();
+			}
+		}		
+		System.out.println(" -> 총 " + newList.size() + "개의 카테고리가 등록되어 있습니다.");
+	}
+
 	
 	public static void findKeyword(TodoList l, String keyword) {
 		int index = 0;

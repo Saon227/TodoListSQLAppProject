@@ -39,8 +39,13 @@ public class TodoMain {
 				break;
 				
 			case "ls":
-				System.out.println("[전체 목록 (총 " + l.getList().size() + "개)]");
+				System.out.println("\n[전체 목록 (총 " + l.getList().size() + "개)]");
 				isList = true; //TodoUtil.listAll(l);
+				break;
+				
+			case "ls_cate":
+				System.out.println("\n[카테고리 목록]");
+				TodoUtil.listCategory(l);
 				break;
 
 			case "ls_name_asc":
@@ -71,13 +76,13 @@ public class TodoMain {
 				
 			case "find":
 				String keyword = sc.next().trim();
-				System.out.println("[항목 검색 결과]");
+				System.out.println("\n[항목 검색 결과]");
 				TodoUtil.findKeyword(l, keyword);
 				break;
 				
 			case "find_cate":
 				String cate = sc.next().trim();
-				System.out.println("[카테고리 검색 결과]");
+				System.out.println("\n[카테고리 검색 결과]");
 				TodoUtil.findCategory(l, cate);
 				break;
 				

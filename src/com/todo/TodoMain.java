@@ -72,7 +72,13 @@ public class TodoMain {
 			case "find":
 				String keyword = sc.next().trim();
 				System.out.println("[항목 검색 결과]");
-				TodoUtil.findItem(l, keyword);
+				TodoUtil.findKeyword(l, keyword);
+				break;
+				
+			case "find_cate":
+				String cate = sc.next().trim();
+				System.out.println("[카테고리 검색 결과]");
+				TodoUtil.findCategory(l, cate);
 				break;
 				
 			case "help":

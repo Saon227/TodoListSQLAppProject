@@ -116,12 +116,25 @@ public class TodoUtil {
 		}
 	}
 	
-	public static void findItem(TodoList l, String keyword) {
+	public static void findKeyword(TodoList l, String keyword) {
 		int index = 0;
 		int count = 0;
 		for (TodoItem item : l.getList()) {
 			index++;
-			if (item.toString().contains(keyword)) {
+			if (item.getTitle().contains(keyword) || item.getDesc().contains(keyword)) {
+				System.out.println(" " + index + ". "+ item.toString());
+				count++;
+			}
+		}
+		System.out.println(" -> 총 " + count + "개의 항목을 찾았습니다.");
+	}
+	
+	public static void findCategory(TodoList l, String cate) {
+		int index = 0;
+		int count = 0;
+		for (TodoItem item : l.getList()) {
+			index++;
+			if (item.getCategory().contains(cate)) {
 				System.out.println(" " + index + ". "+ item.toString());
 				count++;
 			}

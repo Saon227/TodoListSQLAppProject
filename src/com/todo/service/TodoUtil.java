@@ -68,6 +68,8 @@ public class TodoUtil {
 				break;
 			}
 		}
+		//System.out.println(" " + num + ". "+ getItem(num-1).toString());
+		
 	}
 
 	public static void updateItem(TodoList l) {

@@ -9,6 +9,7 @@ public class TodoItem {
     private String current_date;
     private String category;
     private String due_date;
+    private int id;
     
     public String toSaveString() {
     	return category + "##" + title + "##" + desc + "##" + due_date + "##" + current_date + "\n";
@@ -75,4 +76,12 @@ public class TodoItem {
     public void setCurrent_date(String current_date) {
         this.current_date = current_date;
     }
+
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 }

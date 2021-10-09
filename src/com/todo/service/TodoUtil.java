@@ -37,8 +37,9 @@ public class TodoUtil {
 		due_date = sc.nextLine().trim();
 		
 		TodoItem t = new TodoItem(title, desc, category, due_date);
-		list.addItem(t);
-		System.out.println(" -> 저장되었습니다.");
+//		list.addItem(t);
+		if(list.addItem(t)>0)
+			System.out.println(" -> 저장되었습니다.");
 	}
 
 	public static void deleteItem(TodoList l) {
@@ -53,21 +54,24 @@ public class TodoUtil {
 			return;
 		}
 		
-		int index = 0;
-		for (TodoItem item : l.getList()) {
-			index++;
-			if (index == num) {
-				System.out.println(" " + index + ". "+ item.toString());
-				System.out.print(" 위 항목을 삭제하시겠습니까? (y/n) > ");
-				String flag = sc.next().trim();
-				
-				if(flag.equals("y")) {
-					l.deleteItem(item);
-					System.out.println(" -> 삭제되었습니다.");
-				}
-				break;
-			}
-		}
+		if(l.deleteItem(num) > 0)
+			System.out.println(" -> 삭제되었습니다.");
+		
+//		int index = 0;
+//		for (TodoItem item : l.getList()) {
+//			index++;
+//			if (index == num) {
+//				System.out.println(" " + index + ". "+ item.toString());
+//				System.out.print(" 위 항목을 삭제하시겠습니까? (y/n) > ");
+//				String flag = sc.next().trim();
+//				
+//				if(flag.equals("y")) {
+//					l.deleteItem(item);
+//					System.out.println(" -> 삭제되었습니다.");
+//				}
+//				break;
+//			}
+//		}
 		//System.out.println(" " + num + ". "+ getItem(num-1).toString());
 		
 	}
@@ -104,17 +108,22 @@ public class TodoUtil {
 		System.out.print(" 새로운 마감날짜를 입력하세요 > ");
 		String new_due_date = sc.nextLine().trim();
 		
-		int index = 0;
-		for (TodoItem item : l.getList()) {
-			index++;
-			if (index == num) {
-				l.deleteItem(item);
-				TodoItem t = new TodoItem(new_title, new_description, new_category, new_due_date);
-				l.addItem(t);
-				System.out.println(" -> 수정되었습니다.");
-				break;
-			}
-		}
+//		int index = 0;
+//		for (TodoItem item : l.getList()) {
+//			index++;
+//			if (index == num) {
+//				l.deleteItem(item);
+//				TodoItem t = new TodoItem(new_title, new_description, new_category, new_due_date);
+//				l.addItem(t);
+//				System.out.println(" -> 수정되었습니다.");
+//				break;
+//			}
+//		}
+		
+		TodoItem t = new TodoItem(new_title, new_description, new_category, new_due_date);
+		t.setId(num);
+		if(l.updateItem(t) > 0)
+			System.out.println(" -> 수정되었습니다.");
 	}
 	
 	public static void listCategory(TodoList l) {

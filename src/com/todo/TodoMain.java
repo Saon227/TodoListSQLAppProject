@@ -78,6 +78,15 @@ public class TodoMain {
 				TodoUtil.findCategory(l, cate);
 				break;
 				
+			case "comp":
+				int num = sc.nextInt();
+				TodoUtil.completeItem(l, num);
+				break;
+			
+			case "ls_comp":
+				TodoUtil.listComplete(l);
+				break;
+				
 			case "help":
 				Menu.displaymenu();
 				break;

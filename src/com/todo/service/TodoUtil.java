@@ -36,7 +36,7 @@ public class TodoUtil {
 		System.out.print(" 마감날짜를 입력하세요 > ");
 		due_date = sc.nextLine().trim();
 		
-		TodoItem t = new TodoItem(title, desc, category, due_date);
+		TodoItem t = new TodoItem(title, desc, category, due_date, 0);
 
 		if(l.addItem(t)>0)
 			System.out.println(" -> 저장되었습니다.");
@@ -70,7 +70,7 @@ public class TodoUtil {
 			return;
 		}
 		
-		System.out.println(" " + num + ". "+ l.getList().get(num-1).toString());
+		System.out.println(" " + l.getList().get(num-1).getId() + ". "+ l.getList().get(num-1).toString());
 
 		System.out.print(" 새로운 제목을 입력하세요 > ");
 		String new_title = sc.next().trim();
@@ -90,7 +90,7 @@ public class TodoUtil {
 		System.out.print(" 새로운 마감날짜를 입력하세요 > ");
 		String new_due_date = sc.nextLine().trim();
 		
-		TodoItem t = new TodoItem(new_title, new_description, new_category, new_due_date);
+		TodoItem t = new TodoItem(new_title, new_description, new_category, new_due_date, 0);
 		t.setId(num);
 		if(l.updateItem(t) > 0)
 			System.out.println(" -> 수정되었습니다.");
@@ -110,7 +110,7 @@ public class TodoUtil {
 		int count = 0;
 		for (TodoItem item : l.getList(keyword)) {
 			count++;
-			System.out.println(" " + count + ". "+ item.toString());
+			System.out.println(" " + item.getId() + ". "+ item.toString());
 		}
 		System.out.println(" -> 총 " + count + "개의 항목을 찾았습니다.");
 	}
@@ -119,26 +119,38 @@ public class TodoUtil {
 		int count = 0;
 		for (TodoItem item : l.getListCategory(cate)) {
 			count++;
-			System.out.println(" " + count + ". "+ item.toString());
+			System.out.println(" " + item.getId() + ". "+ item.toString());
 		}
 		System.out.println(" -> 총 " + count + "개의 항목을 찾았습니다.");
 	}
 	
 	public static void listAll(TodoList l) {
-		int index = 0;
 		for (TodoItem item : l.getList()) {
-			index++;
-			System.out.println(" " + index + ". "+ item.toString());
+			System.out.println(" " + item.getId() + ". "+ item.toString());
 		}
 	}
 	
 	public static void listAll(TodoList l, String orderby, int ordering) {
 		System.out.println("\n[전체 목록 (총 " + l.getCount() + "개)]");
-		int index = 0;
 		for (TodoItem item : l.getOrderedList(orderby, ordering)) {
-			index++;
-			System.out.println(" " + index + ". "+ item.toString());
+			System.out.println(" " + item.getId() + ". "+ item.toString());
 		}
+	}
+	
+	public static void completeItem(TodoList l, int num) {
+		TodoItem t = new TodoItem(1);
+		t.setId(num);
+		if(l.compItem(t) > 0)
+			System.out.println(" -> 수정되었습니다.");
+	}
+	
+	public static void listComplete(TodoList l) {
+		int count = 0;
+		for (TodoItem item : l.getListComplete()) {
+			count++;
+			System.out.println(" " + item.getId() + ". "+ item.toString());
+		}
+		System.out.println(" -> 총 " + count + "개의 항목이 완료되었습니다.");
 	}
 	
 	public static void loadList(TodoList l, String filename) {

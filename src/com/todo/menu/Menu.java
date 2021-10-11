@@ -15,9 +15,9 @@ public class Menu {
         System.out.println(" 날짜순 정렬 : ls_date");
         System.out.println(" 날짜역순 정렬 : ls_date_desc");
         System.out.println(" 완료 체크 : comp [id]");
-        System.out.println(" 완료 체크 정렬 : comp_ls");
+        System.out.println(" 완료 항목 정렬 : comp_ls");
         System.out.println(" 항목 검색 : find [키워드]");
-        System.out.println(" 카테고리 검색 : find_cate");
+        System.out.println(" 카테고리 검색 : find_cate [키테고리]");
         System.out.println(" 종료 : exit");
     }
     

@@ -91,8 +91,16 @@ public class TodoList {
 		return count;
 	}
 	
-
 	public int deleteItem(int index) {
+		
+		Scanner sc = new Scanner(System.in);
+		String flag = "n";
+		System.out.print("\n -> 정말로 삭제하시겠습니까? (y/n) > ");
+		flag = sc.next().trim();
+		
+		if(flag.equals("n")) 
+			return 0;
+		
 		String sql = "delete from list where id=?;";
 		PreparedStatement pstmt;
 		int count = 0;

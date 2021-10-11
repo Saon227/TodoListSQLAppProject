@@ -101,6 +101,6 @@ public class TodoMain {
 				break;
 			}
 		} while (!quit);
-		TodoUtil.saveList(l, "todolist.txt");
+		//TodoUtil.saveList(l, "todolist.txt");
 	}
 }

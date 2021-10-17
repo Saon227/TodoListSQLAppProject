@@ -1,18 +1,18 @@
 package com.todo.service;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+//import java.io.BufferedReader;
+//import java.io.FileNotFoundException;
+//import java.io.FileReader;
+//import java.io.FileWriter;
+//import java.io.IOException;
+//import java.io.Writer;
 import java.util.*;
 
 import com.todo.dao.TodoItem;
 import com.todo.dao.TodoList;
 
 public class TodoUtil {
-	static String info = "      <카테고리> " + "<제목>\t" + " <완료>  " + "<내용>\t\t\t" + "<과목>    " + "<장소>   " + "<완료일자>        " + "<작성일자>";
+	static String info = "      <카테고리> " + "<제목>\t" + " <완료>  " + "<내용>\t\t\t" + "<과목>    " + "<장소>   " + "<완료일자>     " + "<작성일자>";
 
 	public static void createItem(TodoList l) {
 

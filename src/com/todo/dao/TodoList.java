@@ -1,7 +1,6 @@
 package com.todo.dao;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.sql.*;
 import java.util.*;

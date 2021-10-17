@@ -32,7 +32,7 @@ public class TodoItem {
     	subject = ((subject == null) ? "         " : subject+"\t ");
     	place = ((place == null) ? "        " : place+"\t ");
     	
-    	return String.format("%-8s", " [" + category + "]") + title + check + " : " + desc + "\t" + subject + place + due_date + "  -  " + current_date;
+    	return String.format("%-8s", " [" + category + "]") + title + check + " : " + desc + "\t" + subject + place + due_date + "  " + current_date;
     }
 
 	public TodoItem(String title, String desc, String category, String due_date, int is_completed, String subject, String place){

@@ -95,6 +95,14 @@ public class TodoMain {
 				quit = true;
 				System.out.println(" -> 종료합니다.");
 				break;
+			
+			case "add_subject":
+				TodoUtil.addSubject(l);
+				break;
+			
+			case "add_place":
+				TodoUtil.addPlace(l);
+				break;
 
 			default:
 				System.out.println(" -> 정확한 명령어를 입력하세요. (도음말 - help)");

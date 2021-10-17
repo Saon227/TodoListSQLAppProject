@@ -12,7 +12,8 @@ import com.todo.dao.TodoItem;
 import com.todo.dao.TodoList;
 
 public class TodoUtil {
-	
+	static String info = "      <카테고리> " + "<제목>\t" + " <완료>  " + "<내용>\t\t\t" + "<과목>    " + "<장소>   " + "<완료일자>        " + "<작성일자>";
+
 	public static void createItem(TodoList l) {
 
 		String title, desc, category, due_date;
@@ -36,7 +37,7 @@ public class TodoUtil {
 		System.out.print(" 마감날짜를 입력하세요 > ");
 		due_date = sc.nextLine().trim();
 		
-		TodoItem t = new TodoItem(title, desc, category, due_date, 0);
+		TodoItem t = new TodoItem(title, desc, category, due_date, 0, null, null);
 
 		if(l.addItem(t)>0)
 			System.out.println(" -> 저장되었습니다.");
@@ -49,10 +50,12 @@ public class TodoUtil {
 		System.out.print(" 삭제할 항목의 번호를 입력하세요 > ");
 		int id = sc.nextInt();
 		
+		System.out.println(info);
+
 		int flag = 0;
 		for(TodoItem item : l.getList()) {
 			if(item.getId() == id) {
-				System.out.println(" " + id + ". "+ item.toString());
+				System.out.println(" " + String.format("%3s", id) + ". "+ item.toString());
 				flag++;
 				break;
 			}
@@ -74,10 +77,12 @@ public class TodoUtil {
 		System.out.print(" 수정할 항목의 번호를 입력하세요 > ");
 		int id = sc.nextInt();
 		
+		System.out.println(info);
+
 		int flag = 0;
 		for(TodoItem item : l.getList()) {
 			if(item.getId() == id) {
-				System.out.println(" " + id + ". "+ item.toString());
+				System.out.println(" " + String.format("%3s", id) + ". "+ item.toString());
 				flag++;
 				break;
 			}
@@ -101,7 +106,7 @@ public class TodoUtil {
 		System.out.print(" 새로운 마감날짜를 입력하세요 > ");
 		String new_due_date = sc.nextLine().trim();
 		
-		TodoItem t = new TodoItem(new_title, new_description, new_category, new_due_date, 0);
+		TodoItem t = new TodoItem(new_title, new_description, new_category, new_due_date, 0, null, null);
 		t.setId(id);
 		if(l.updateItem(t) > 0)
 			System.out.println(" -> 수정되었습니다.");
@@ -118,42 +123,51 @@ public class TodoUtil {
 
 	
 	public static void findKeyword(TodoList l, String keyword) {
+		System.out.println(info);
+
 		int count = 0;
 		for (TodoItem item : l.getList(keyword)) {
 			count++;
-			System.out.println(" " + item.getId() + ". "+ item.toString());
+			System.out.println(" " + String.format("%3s", item.getId()) + ". "+ item.toString());
 		}
 		System.out.println(" -> 총 " + count + "개의 항목을 찾았습니다.");
 	}
 	
 	public static void findCategory(TodoList l, String cate) {
+		System.out.println(info);
+
 		int count = 0;
 		for (TodoItem item : l.getListCategory(cate)) {
 			count++;
-			System.out.println(" " + item.getId() + ". "+ item.toString());
+			System.out.println(" " + String.format("%3s", item.getId()) + ". "+ item.toString());
 		}
 		System.out.println(" -> 총 " + count + "개의 항목을 찾았습니다.");
 	}
 	
 	public static void listAll(TodoList l) {
+		System.out.println(info);
+
 		for (TodoItem item : l.getList()) {
-			System.out.println(" " + item.getId() + ". "+ item.toString());
+			System.out.println(" " + String.format("%3s", item.getId()) + ". "+ item.toString());
 		}
 	}
 	
 	public static void listAll(TodoList l, String orderby, int ordering) {
 		System.out.println("\n[전체 목록 (총 " + l.getCount() + "개)]");
+		System.out.println(info);
+
 		for (TodoItem item : l.getOrderedList(orderby, ordering)) {
-			System.out.println(" " + item.getId() + ". "+ item.toString());
+			System.out.println(" " + String.format("%3s", item.getId()) + ". "+ item.toString());
 		}
 	}
 	
 	public static void completeItem(TodoList l, int id) {
-		
+		System.out.println(info);
+
 		int flag = 0;
 		for(TodoItem item : l.getList()) {
 			if(item.getId() == id) {
-				System.out.println(" " + id + ". "+ item.toString());
+				System.out.println(" " + String.format("%3s", id) + ". "+ item.toString());
 				flag++;
 				break;
 			}
@@ -172,13 +186,80 @@ public class TodoUtil {
 	
 	public static void listComplete(TodoList l) {
 		System.out.println("\n[완료 항목 목록]");
+		System.out.println(info);
+
 		int count = 0;
 		for (TodoItem item : l.getListComplete()) {
 			count++;
-			System.out.println(" " + item.getId() + ". "+ item.toString());
+			System.out.println(" " + String.format("%3s", item.getId()) + ". "+ item.toString());
 		}
 		System.out.println(" -> 총 " + count + "개의 항목이 완료되었습니다.");
 	}
+	
+	public static void addSubject(TodoList l) {
+		
+		Scanner sc = new Scanner(System.in);
+
+		System.out.print(" 과목을 추가할 항목의 번호를 입력하세요 > ");
+		int id = sc.nextInt();
+		
+		System.out.println(info);
+
+		int flag = 0;
+		for(TodoItem item : l.getList()) {
+			if(item.getId() == id) {
+				System.out.println(" " + String.format("%3s", id) + ". "+ item.toString());
+				flag++;
+				break;
+			}
+		}
+		
+		if(flag == 0) {
+			System.out.println(" -> 해당 번호가 존재하지 않습니다.");
+			return;
+		}
+		
+		System.out.print("\n 과목명을 입력하세요 > ");
+		String subject = sc.next().trim();
+		
+		TodoItem t = new TodoItem(subject, id);
+		t.setId(id);
+		if(l.addSubject(t) > 0)
+			System.out.println(" -> 수정되었습니다.");
+	}
+	
+public static void addPlace(TodoList l) {
+		
+		Scanner sc = new Scanner(System.in);
+
+		System.out.print(" 장소를 추가할 항목의 번호를 입력하세요 > ");
+		int id = sc.nextInt();
+		
+		System.out.println(info);
+
+		int flag = 0;
+		for(TodoItem item : l.getList()) {
+			if(item.getId() == id) {
+				System.out.println(" " + String.format("%3s", id) + ". "+ item.toString());
+				flag++;
+				break;
+			}
+		}
+		
+		if(flag == 0) {
+			System.out.println(" -> 해당 번호가 존재하지 않습니다.");
+			return;
+		}
+		
+		System.out.print("\n 장소명을 입력하세요 > ");
+		String place = sc.next().trim();
+		
+		TodoItem t = new TodoItem(id, place);
+		t.setId(id);
+		if(l.addPlace(t) > 0)
+			System.out.println(" -> 수정되었습니다.");
+	}	
+	
 	
 //	public static void loadList(TodoList l, String filename) {
 //		//BufferedReader, FileReader, StringTokenizer 사용

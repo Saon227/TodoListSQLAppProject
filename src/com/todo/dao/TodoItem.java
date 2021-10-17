@@ -11,17 +11,31 @@ public class TodoItem {
     private String due_date;
     private int id;
     private int is_completed;
+    private String subject;
+    private String place;
 
-	public String toSaveString() {
-    	return category + "##" + title + "##" + desc + "##" + due_date + "##" + current_date + "\n";
-    }
+//	public String toSaveString() {
+//    	return category + "##" + title + "##" + desc + "##" + due_date + "##" + current_date + "\n";
+//    }
     
     @Override
     public String toString() {
-    	return "[" + category + "] " + title + ((is_completed!=0) ? " [V]" : " [ ]") + " : " + desc + " (~" + due_date + ")" + " - " + current_date;
+    	
+    	title += "\t  ";
+    	String check = String.format("%-3s", ((is_completed!=0) ? "[V]" : "[_]"));
+    	if(desc.length()<13) {
+    		desc += "\t";
+    		if(desc.length()<8) {
+    			desc += "\t";
+    		}
+    	}
+    	subject = ((subject == null) ? "         " : subject+"\t ");
+    	place = ((place == null) ? "        " : place+"\t ");
+    	
+    	return String.format("%-8s", " [" + category + "]") + title + check + " : " + desc + "\t" + subject + place + due_date + "  -  " + current_date;
     }
 
-    public TodoItem(String title, String desc, String category, String due_date, int is_completed){
+	public TodoItem(String title, String desc, String category, String due_date, int is_completed, String subject, String place){
         this.title = title;
         this.desc = desc;
         SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
@@ -29,6 +43,8 @@ public class TodoItem {
         this.category = category;
         this.due_date = due_date;
         this.is_completed = is_completed;
+        this.subject = subject;
+        this.place = place;
     } //새로 생성, 수정할때
     
     public TodoItem(String title, String desc, String current_date, String category, String due_date){
@@ -41,6 +57,14 @@ public class TodoItem {
     
     public TodoItem(int is_completed){
         this.is_completed = is_completed;
+    } //완료 체크할 때
+    
+    public TodoItem(String subject, int id){
+        this.subject = subject;
+    } //완료 체크할 때
+    
+    public TodoItem(int id, String place){
+        this.place = place;
     } //완료 체크할 때
     
     public String getCategory() {
@@ -97,5 +121,21 @@ public class TodoItem {
 
 	public void setIs_completed(int is_completed) {
 		this.is_completed = is_completed;
+	}
+	
+    public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
 	}
 }
